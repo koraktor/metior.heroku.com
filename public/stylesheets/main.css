@@ -50,7 +50,7 @@ div#content {
   box-shadow:    #000 4px 4px 4px;
   padding:       3.5em;
   text-align:    justify;
-  
+
   -moz-border-radius:    4px 4px 0 0;
   -moz-box-shadow:       #000 4px 4px 4px;
   -webkit-border-radius: 4px 4px 0 0;
@@ -182,6 +182,13 @@ h4 {
 
 img {
   border: none;
+}
+
+img#github-ribbon {
+  border:   none;
+  left:     0;
+  position: absolute;
+  top:      0;
 }
 
 input {

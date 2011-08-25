@@ -4,15 +4,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <title>Metior</title>
-  
+
   <%= javascript_include_tag :all %>
   <%= stylesheet_link_tag :all %>
   <link rel="icon" href="<%= image_path 'favicon.png' %>" type="image/png">
   <%= csrf_meta_tag %>
-  
+
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 </head>
 <body>
+    <a href="https://github.com/koraktor/metior">
+        <img id="github-ribbon"
+             src="http://s3.amazonaws.com/github/ribbons/forkme_left_orange_ff7600.png"
+             alt="Fork me on GitHub" />
+    </a>
     <div id="header">
         <%= link_to ('Meti%sr' % [image_tag('metior.png')]).html_safe, '/' %>
     </div>
