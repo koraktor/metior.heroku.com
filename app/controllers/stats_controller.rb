@@ -27,7 +27,7 @@ class StatsController < ApplicationController
     end
     repo = Metior::Git::Repository.new repo_path
 
-    report_path = "/tmp/metior/reports/#{github_project}"
+    report_path = File.join Rails.root, "tmp/reports/#{github_project}"
     Metior::Report::Heroku.new(repo).generate report_path
 
     render :file => File.join(report_path, 'index.html')
