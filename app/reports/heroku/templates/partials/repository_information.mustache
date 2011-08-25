@@ -1,0 +1,15 @@
+<div id="repository_information">
+    <h2>Repository information</h2>
+    {{#name?}}
+        <strong>Project name:</strong> {{name}}<br />
+    {{/name?}}
+    {{#description?}}
+        <strong>Project description:</strong> {{description}}<br />
+    {{/description?}}
+    <strong>Analyzed commit range:</strong> {{range}}<br />
+    <strong>Number of commits:</strong> {{commit_count}}<br />
+    <strong>Initial commit date:</strong> {{initial_commit_date}}<br />
+    <strong>Last commit date:</strong> {{last_commit_date}}<br />
+    <strong>Most active day:</strong> {{most_active_day}}<br />
+    <strong>Average commits:</strong> {{commits_per_active_day}} per active day
+</div>

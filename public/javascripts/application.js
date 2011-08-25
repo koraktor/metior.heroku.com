@@ -1,0 +1,23 @@
+var formHandler = function() {
+    $('input').each(function() {
+        if($(this).val() == this.defaultValue) {
+            $(this).addClass('inactive');
+        }
+    });
+
+    $('input.inactive').live('focus', function() {
+        $(this).removeClass('inactive');
+        this.value = '';
+    });
+
+    $('input').blur(function() {
+        if($(this).val().match(/^\s*$/)) {
+            $(this).addClass('inactive');
+            this.value = this.defaultValue;
+        }
+    });
+
+    $('#submit').click(function() {
+        return $('input.inactive').length == 0;
+    });
+};

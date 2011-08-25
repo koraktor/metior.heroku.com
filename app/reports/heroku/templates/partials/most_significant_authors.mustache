@@ -1,0 +1,12 @@
+<div id="most_significant_authors">
+    <h3>Top authors by line changes</h3>
+    <table>
+        {{#authors}}
+        <tr class="{{even_odd}}">
+          <th>{{> actor/minimal}}</th>
+          <td>{{modifications}} line changes</td>
+        </tr>
+        {{/authors}}
+        {{reset_count}}
+    </table>
+</div>

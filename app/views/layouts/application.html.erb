@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Metior</title>
+  
+  <%= javascript_include_tag :all %>
+  <%= stylesheet_link_tag :all %>
+  <link rel="icon" href="<%= image_path 'favicon.png' %>" type="image/png">
+  <%= csrf_meta_tag %>
+  
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+</head>
+<body>
+    <div id="header">
+        <%= link_to ('Meti%sr' % [image_tag('metior.png')]).html_safe, '/' %>
+    </div>
+    <div id="content">
+        <% if flash[:error] %>
+            <div id="flash-error"><%= flash[:error] %></div>
+        <% end %>
+        <%= yield %>
+    </div>
+    <div id="footer">
+        © 2011 — Sebastian Staudt<br />
+        Powered by <a href="http://koraktor.de/metior">Metior</a>.
+    </div>
+</body>
+</html>

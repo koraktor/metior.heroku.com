@@ -1,0 +1,258 @@
+@import url(http://fonts.googleapis.com/css?family=Bevan&v2);
+
+html {
+  background: #382211;
+  width:      100%;
+}
+
+body {
+  color:       #ffb;
+  font-family: Helvetica, sans-serif;
+  margin:      2em 0 1em 5em;
+  width:       980px;
+}
+
+a {
+  font-weight: bold;
+}
+
+a:hover, a.active {
+  color: #aa5;
+}
+
+a, em {
+  color:       #f95;
+  font-style:  normal;
+  text-shadow: #000 1px 1px 1px;
+}
+
+button#submit, input {
+  border-radius: 5px;
+  font-family:   'Bevan', serif;
+}
+
+button#submit {
+  background: #563412;
+  border:     2px solid #aa5;
+  color:      #aa5;
+  font-size:  18pt;
+}
+
+button#submit:hover {
+  color:      #ffb;
+  background: #704525;
+}
+
+div#content {
+  background:    #521;
+  border:        2px solid #ffb;
+  border-radius: 4px 4px 0 0;
+  box-shadow:    #000 4px 4px 4px;
+  padding:       3.5em;
+  text-align:    justify;
+  
+  -moz-border-radius:    4px 4px 0 0;
+  -moz-box-shadow:       #000 4px 4px 4px;
+  -webkit-border-radius: 4px 4px 0 0;
+  -webkit-box-shadow:    #000 4px 4px 4px;
+}
+
+div#content form {
+  font-family: 'Bevan', 'Times New Roman', serif;
+  font-size:   20pt;
+  text-align:  center;
+}
+
+div#content div {
+  padding: 0.5em 0.5em 1em 0.5em;
+}
+
+div#content, div#footer {
+  box-shadow: #000 4px 4px 4px;
+
+  -moz-box-shadow: #000 4px 4px 4px;
+  -webkit-box-shadow: #000 4px 4px 4px;
+}
+
+div#content div:not(:last-child) {
+  border-bottom: 2px solid #ffb;
+}
+
+div#flash-error {
+  background:    #f99;
+  border:        2px solid #a00 !important;
+  border-top:    none !important;
+  border-radius: 0 0 5px 5px;
+  color:         #a00;
+  font-family:   'Helvetica', sans-serif;
+  font-size:     12pt;
+  font-weight:   bold;
+  left:          -2em;
+  margin:        -3.5em 0 0 289px;
+  padding:       2px !important;
+  position:      absolute;
+  text-align:    center;
+  width:         588px;
+
+  -moz-border-radius:    0 0 5px 5px;
+  -webkit-border-radius: 0 0 5px 5px;
+}
+
+div#footer {
+  background:    #563412;
+  border-top:    1px solid #aa5;
+  border-radius: 0 0 4px 4px;
+  text-align:    center;
+  padding:       0.5em 0;
+}
+
+div#header {
+  font-family:  'Bevan', 'Times New Roman', serif;
+  font-size:    10em;
+  font-weight:  bold;
+  text-align:   right;
+  text-shadow:  #000 10px 10px 1px;
+}
+
+div#header a {
+  color:           #ffb;
+  text-decoration: none;
+}
+
+div#header img {
+  margin:         -0.2em -0.5em 0 -0.1em;
+  vertical-align: bottom;
+}
+
+div#timestamp {
+  font-size:  9pt;
+  margin-top: 3em;
+  width:      100%;
+  text-align: center;
+}
+
+div#footer {
+  color:      #aa5;
+  font-size:  10pt;
+  padding-top: 0.5em;
+  text-align:  center;
+}
+
+div#repository_information strong {
+  margin-left: 2em;
+}
+
+div#most_significant_commits th {
+  width: 87%;
+}
+
+em, h1, h2, h3 {
+  font-family: Bevan, serif;
+}
+
+h1 {
+  color:           #f95;
+  border-bottom:   2px solid #aa5;
+  font-size:       25pt;
+  font-weight:     normal;
+  line-height:     25pt;
+  margin-bottom:   0;
+  text-decoration: none;
+  text-shadow:     #000 2px 2px 1px;
+
+  -webkit-box-bottom-shadow: #000 2px 2px;
+}
+
+h1 em {
+  color: #ffb;
+}
+
+h2, h3 {
+  color:       #f95;
+  text-shadow: #000 1px 1px 2px;
+
+  -moz-text-shadow:    #000 1px 1px 2px;
+  -webkit-text-shadow: #000 1px 1px 2px;
+}
+
+h4 {
+  margin-top: 0;
+  text-align: right;
+}
+
+img {
+  border: none;
+}
+
+input {
+  background: #521;
+  border:     1px solid #aa5;
+  color:      #f95;
+  font-size:  20pt;
+  width:      45%;
+}
+
+input.inactive {
+  color: #bbb;
+}
+
+input#project {
+  padding-left: 0.2em;
+  text-align:   left;
+}
+
+input#user {
+  padding-right: 0.2em;
+  text-align:    right;
+}
+
+span.add, span.del {
+  font-weight: bold;
+}
+
+table {
+  border-collapse: collapse;
+  margin:          0 auto;
+  width:           98%;
+}
+
+td:last-child {
+  text-align: right;
+}
+
+td.add {
+  color: #090;
+}
+
+td.del {
+  color: #a00;
+}
+
+td.no_padding {
+  padding: 0 0.2em;
+}
+
+td, th {
+  padding: 0.2em;
+}
+
+th {
+  text-align: left;
+}
+
+tr:not(:last-child) {
+  border-bottom: 1px solid #652;
+}
+
+tr.even {
+  background: #521;
+}
+
+tr.odd {
+  background: #563412;
+}
+
+ul {
+  list-style:    square;
+  margin-bottom: 0;
+}
