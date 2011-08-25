@@ -12,6 +12,7 @@ class StatsController < ApplicationController
     response.headers['Cache-Control'] = 'public, max-age=3600'
 
     github_project = "#{params[:user]}/#{params[:project]}"
+    @title = github_project
 
     repo_path = "/tmp/metior/repositories/#{github_project}.git"
     if File.exist? repo_path
