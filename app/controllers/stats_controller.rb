@@ -9,9 +9,11 @@ class StatsController < ApplicationController
   end
 
   def report
+    @user, @project = params[:user], params[:project]
+
     response.headers['Cache-Control'] = 'public, max-age=3600'
 
-    github_project = "#{params[:user]}/#{params[:project]}"
+    github_project = "#{@user}/#{@project}"
     @title = github_project
 
     repo_path = "#{tmp_path}/repositories/#{github_project}.git"
@@ -22,7 +24,7 @@ class StatsController < ApplicationController
       `git clone --mirror git://github.com/#{github_project}.git #{repo_path}`
       unless $?.success?
         flash[:error] = "#{github_project} could not bet fetched from GitHub."
-        redirect_to '/'
+        render :index, :status => :not_found
         return
       end
     end
@@ -31,7 +33,7 @@ class StatsController < ApplicationController
       flash[:error] = "#{github_project} has no commits in the \"master\" " <<
                       "branch.<br />Support for other branches will be " <<
                       "added soon."
-      redirect_to '/'
+      render :index, :status => :not_found
       return
     end
 

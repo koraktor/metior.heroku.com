@@ -3,9 +3,9 @@
 </script>
 
 <form action="stats">
-    <input id="user" name="user" type="text" value="user name" />
+    <input id="user" name="user" type="text" value="<%= @user || 'user name' %>" />
     /
-    <input id="project" name="project" type="text" value="project" />
+    <input id="project" name="project" type="text" value="<%= @project || 'project' %>" />
     <br /><br />
     <button id="submit" type="submit">Generate stats!</button>
 </form>
