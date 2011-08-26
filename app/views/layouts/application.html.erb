@@ -34,7 +34,7 @@
     </div>
     <div id="content">
         <% if flash[:error] %>
-            <div id="flash-error"><%= flash[:error] %></div>
+            <div id="flash-error"><%= flash[:error].html_safe %></div>
         <% end %>
         <%= yield %>
     </div>

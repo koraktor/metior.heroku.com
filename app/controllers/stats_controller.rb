@@ -27,6 +27,13 @@ class StatsController < ApplicationController
       end
     end
     repo = Metior::Git::Repository.new repo_path
+    if repo.commits.empty?
+      flash[:error] = "#{github_project} has no commits in the \"master\" " <<
+                      "branch.<br />Support for other branches will be " <<
+                      "added soon."
+      redirect_to '/'
+      return
+    end
 
     report_path = "#{tmp_path}/reports/#{github_project}"
     Metior::Report::Heroku.new(repo).generate report_path
