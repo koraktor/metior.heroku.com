@@ -14,12 +14,12 @@ class Metior::Report
 
     @@name = :heroku
 
-    @@views = [ :index ]
+    @@views = [ :index, :calendar ]
 
     def init
       @commits.modifications if repository.supports? :line_stats
     end
-    
+
     def self.path
       File.join File.dirname(__FILE__), name
     end

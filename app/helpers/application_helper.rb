@@ -3,7 +3,7 @@
 module ApplicationHelper
 
   def title
-    "#{@title} – " unless @title.nil?
+    "#{@github_project} – " unless @github_project.nil?
   end
 
 end

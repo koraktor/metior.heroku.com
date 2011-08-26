@@ -4,39 +4,60 @@ require File.join(Rails.root, 'app', 'reports', 'heroku')
 
 class StatsController < ApplicationController
 
+  def calendar
+    return unless generate_report
+    render :file => File.join(report_path, 'calendar.html')
+  end
+
   def report
+    return unless generate_report
+    render :file => File.join(report_path, 'index.html')
+  end
+
+  private
+
+  def generate_report
     @user, @project = params[:user], params[:project]
+    @github_project = "#{@user}/#{@project}"
+
+    if File.exist? report_path
+      last_update = File.mtime File.join(report_path, 'index.html')
+      return true if last_update > Time.now - 3600
+    end
+
+    logger.debug "updating report"
 
     response.headers['Cache-Control'] = 'public, max-age=3600'
 
-    github_project = "#{@user}/#{@project}"
-    @title = github_project
-
-    repo_path = "#{tmp_path}/repositories/#{github_project}.git"
+    repo_path = "#{tmp_path}/repositories/#{@github_project}.git"
     if File.exist? repo_path
       `git --git-dir #{repo_path} remote update`
-      logger.warn "#{github_project} could not be updated." unless $?.success?
+      logger.warn "#{@github_project} could not be updated." unless $?.success?
     else
-      `git clone --mirror git://github.com/#{github_project}.git #{repo_path}`
+      `git clone --mirror git://github.com/#{@github_project}.git #{repo_path}`
       unless $?.success?
-        flash.now[:error] = "#{github_project} could not bet fetched from GitHub."
+        flash.now[:error] = "#{@github_project} could not bet fetched from GitHub."
         render :index, :status => :not_found
-        return
+        return false
       end
     end
+
     repo = Metior::Git::Repository.new repo_path
     current_branch = repo.instance_variable_get(:@grit_repo).head.name
     if repo.commits(current_branch).empty?
-      flash.now[:error] = "#{github_project} has no commits in the " <<
+      flash.now[:error] = "#{@github_project} has no commits in the " <<
                           "\"#{current_branch}\" branch."
       render :index, :status => :not_found
-      return
+      return false
     end
 
-    report_path = "#{tmp_path}/reports/#{github_project}"
     Metior::Report::Heroku.new(repo, current_branch).generate report_path
 
-    render :file => File.join(report_path, 'index.html')
+    true
+  end
+
+  def report_path
+    @report_path ||= "#{tmp_path}/reports/#{@github_project}"
   end
 
   def tmp_path
