@@ -1,4 +1,4 @@
-Metior on Heroku
+3Metior on Heroku
 ================
 
 This web application provides a simple way to generate statistics for projects
@@ -11,7 +11,7 @@ It is built using Rails, Metior and Heroku's application platform.
 
 * Generate more reports
 * Smarter caching
-* Tighter integration into GitHub, e.g. for listign repositories or analyzing
+* Tighter integration into GitHub, e.g. for listing repositories or analyzing
   private repositories
 
 ## Contribute
