@@ -4,10 +4,6 @@ require File.join(Rails.root, 'app', 'reports', 'heroku')
 
 class StatsController < ApplicationController
 
-  rescue_from Grit::NoSuchPathError do
-    redirect_to '/'
-  end
-
   def report
     @user, @project = params[:user], params[:project]
 
