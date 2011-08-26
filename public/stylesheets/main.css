@@ -124,6 +124,13 @@ div#header img {
   vertical-align: bottom;
 }
 
+div#social {
+  float:       left;
+  font-size:   10pt;
+  line-height: 1em;
+  margin:      10em 0 0 2em;
+}
+
 div#timestamp {
   font-size:  9pt;
   margin-top: 3em;
