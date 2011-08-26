@@ -1,5 +1,6 @@
 source 'http://rubygems.org'
 
+gem 'dalli', '~> 1.0.5'
 gem 'jquery-rails'
 gem 'rack-cache', '~> 1.0.2'
 gem 'rails', '3.0.10'
