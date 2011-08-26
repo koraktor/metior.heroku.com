@@ -23,14 +23,14 @@ class StatsController < ApplicationController
     else
       `git clone --mirror git://github.com/#{github_project}.git #{repo_path}`
       unless $?.success?
-        flash[:error] = "#{github_project} could not bet fetched from GitHub."
+        flash.now[:error] = "#{github_project} could not bet fetched from GitHub."
         render :index, :status => :not_found
         return
       end
     end
     repo = Metior::Git::Repository.new repo_path
     if repo.commits.empty?
-      flash[:error] = "#{github_project} has no commits in the \"master\" " <<
+      flash.now[:error] = "#{github_project} has no commits in the \"master\" " <<
                       "branch.<br />Support for other branches will be " <<
                       "added soon."
       render :index, :status => :not_found
