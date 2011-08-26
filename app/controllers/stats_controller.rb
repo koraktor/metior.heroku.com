@@ -14,7 +14,7 @@ class StatsController < ApplicationController
     github_project = "#{params[:user]}/#{params[:project]}"
     @title = github_project
 
-    repo_path = "/tmp/metior/repositories/#{github_project}.git"
+    repo_path = "#{tmp_path}/repositories/#{github_project}.git"
     if File.exist? repo_path
       `git --git-dir #{repo_path} remote update`
       logger.warn "#{github_project} could not be updated." unless $?.success?
@@ -28,10 +28,14 @@ class StatsController < ApplicationController
     end
     repo = Metior::Git::Repository.new repo_path
 
-    report_path = File.join Rails.root, "tmp/reports/#{github_project}"
+    report_path = "#{tmp_path}/reports/#{github_project}"
     Metior::Report::Heroku.new(repo).generate report_path
 
     render :file => File.join(report_path, 'index.html')
+  end
+
+  def tmp_path
+    @tmp_path ||= File.join Rails.root, 'tmp'
   end
 
 end
