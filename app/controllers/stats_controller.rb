@@ -25,16 +25,16 @@ class StatsController < ApplicationController
       end
     end
     repo = Metior::Git::Repository.new repo_path
-    if repo.commits.empty?
-      flash.now[:error] = "#{github_project} has no commits in the \"master\" " <<
-                      "branch.<br />Support for other branches will be " <<
-                      "added soon."
+    current_branch = repo.instance_variable_get(:@grit_repo).head.name
+    if repo.commits(current_branch).empty?
+      flash.now[:error] = "#{github_project} has no commits in the " <<
+                          "\"#{current_branch}\" branch."
       render :index, :status => :not_found
       return
     end
 
     report_path = "#{tmp_path}/reports/#{github_project}"
-    Metior::Report::Heroku.new(repo).generate report_path
+    Metior::Report::Heroku.new(repo, current_branch).generate report_path
 
     render :file => File.join(report_path, 'index.html')
   end
