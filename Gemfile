@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'jquery-rails'
+gem 'rack-cache', '~> 1.0.2'
 gem 'rails', '3.0.10'
 gem 'thin', '~> 1.2.11'
 
