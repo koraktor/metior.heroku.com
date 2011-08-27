@@ -117,9 +117,9 @@ PLATFORMS
 
 DEPENDENCIES
   dalli (~> 1.0.5)
-  jquery-rails
+  jquery-rails (~> 1.0.13)
   metior!
   newrelic_rpm (~> 3.1.1)
   rack-cache (~> 1.0.2)
-  rails (= 3.0.10)
+  rails (~> 3.0.10)
   thin (~> 1.2.11)
