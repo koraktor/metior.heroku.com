@@ -1,11 +1,8 @@
 <div id="repository_information">
     <h2>Repository information</h2>
-    {{#name?}}
-        <strong>Project name:</strong> {{name}}<br />
-    {{/name?}}
-    {{#description?}}
+    {{#description}}
         <strong>Project description:</strong> {{description}}<br />
-    {{/description?}}
+    {{/description}}
     <strong>Analyzed branch:</strong> {{range}}<br />
     <strong>Number of commits:</strong> {{commit_count}}<br />
     <strong>Initial commit date:</strong> {{initial_commit_date}}<br />

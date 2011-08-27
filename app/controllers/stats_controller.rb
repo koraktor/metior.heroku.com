@@ -54,6 +54,11 @@ class StatsController < ApplicationController
     end
 
     repo = Metior::Git::Repository.new repo_path
+    if github_info.description.empty?
+      github_info.description = false
+    end
+    repo.instance_variable_set :@description, github_info.description
+    repo.instance_variable_set :@name, false
     current_branch = repo.instance_variable_get(:@grit_repo).head.name
     if repo.commits(current_branch).empty?
       flash.now[:error] = "#{@github_project} has no commits in the " <<
