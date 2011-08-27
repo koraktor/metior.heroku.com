@@ -1,4 +1,4 @@
-require 'grit'
+require 'octokit'
 
 require File.join(Rails.root, 'app', 'reports', 'heroku')
 
@@ -27,6 +27,17 @@ class StatsController < ApplicationController
         response.headers['Cache-Control'] = "public, max-age=#{cache_time}"
         return true
       end
+    end
+
+    begin
+      github_info = Octokit.repository @github_project
+      @project    = github_info.name
+      @user       = github_info.owner
+      @github_project = "#{@user}/#{@project}"
+    rescue Octokit::NotFound
+      flash.now[:error] = "#{@github_project} does not exist."
+      render :index, :status => :not_found
+      return false
     end
 
     repo_path = "#{tmp_path}/repositories/#{@github_project}.git"
