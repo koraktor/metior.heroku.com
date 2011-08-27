@@ -1,9 +1,9 @@
 source 'http://rubygems.org'
 
 gem 'dalli', '~> 1.0.5'
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 1.0.13'
 gem 'rack-cache', '~> 1.0.2'
-gem 'rails', '3.0.10'
+gem 'rails', '~> 3.0.10'
 gem 'thin', '~> 1.2.11'
 
 gem 'metior', :git => 'git://github.com/koraktor/metior.git'
