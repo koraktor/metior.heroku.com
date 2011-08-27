@@ -1,4 +1,4 @@
-3Metior on Heroku
+Metior on Heroku
 ================
 
 This web application provides a simple way to generate statistics for projects
@@ -7,10 +7,21 @@ stats!".
 
 It is built using Rails, Metior and Heroku's application platform.
 
+## Environment
+
+The application is deployed on Heroku's Cedar stack. It is currently running
+with only one web dyno and without any workers. That's why you may experience
+long loading times when viewing large repositories like `ruby/ruby` or
+`mxcl/homebrew`.
+
+There's a simple caching mechanism that will reuse already generated reports if
+they're not older than 60 minutes. It uses locally stored files so it wouldn't
+work for an isolated worker. But I think that's fine for the beginning.
+
 ## Future plans
 
 * Generate more reports
-* Smarter caching
+* Background processing and smarter caching
 * Tighter integration into GitHub, e.g. for listing repositories or analyzing
   private repositories
 
