@@ -22,12 +22,12 @@ class StatsController < ApplicationController
 
     if File.exist? report_path
       last_update = File.mtime File.join(report_path, 'index.html')
-      return true if last_update > Time.now - 3600
+      if last_update > Time.now - 3600
+        cache_time = 3600 - (Time.now - last_update).to_i
+        response.headers['Cache-Control'] = "public, max-age=#{cache_time}"
+        return true
+      end
     end
-
-    logger.debug "updating report"
-
-    response.headers['Cache-Control'] = 'public, max-age=3600'
 
     repo_path = "#{tmp_path}/repositories/#{@github_project}.git"
     if File.exist? repo_path
@@ -53,6 +53,7 @@ class StatsController < ApplicationController
 
     Metior::Report::Heroku.new(repo, current_branch).generate report_path
 
+    response.headers['Cache-Control'] = 'public, max-age=3600'
     true
   end
 
