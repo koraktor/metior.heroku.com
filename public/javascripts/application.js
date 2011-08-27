@@ -18,6 +18,9 @@ var formHandler = function() {
     });
 
     $('#submit').click(function() {
-        return $('input.inactive').length == 0;
+        if($('input.inactive').length == 0) {
+            window.location = '/' + $('#user').val() + '/' + $('#project').val();
+            return false;
+        }
     });
 };
