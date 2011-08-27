@@ -31,6 +31,10 @@ class StatsController < ApplicationController
 
     begin
       github_info = Octokit.repository @github_project
+      if @project != github_info.name || @user != github_info.owner
+        redirect_to "/#{github_info.owner}/#{github_info.name}"
+        return
+      end
       @project    = github_info.name
       @user       = github_info.owner
       @github_project = "#{@user}/#{@project}"
