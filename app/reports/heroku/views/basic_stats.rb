@@ -6,7 +6,7 @@
 class Metior::Report::Heroku
 
   # @author Sebastian Staudt
-  class Index < View
+  class BasicStats < View
 
     def init
       @activity = @report.commits.activity
@@ -63,7 +63,7 @@ class Metior::Report::Heroku
     def repo_name
       repository.path.match(/([\-_.A-z0-9]+\/[-_.A-z0-9]+).git/)[1]
     end
-    
+
     def reset_count
       super
       nil

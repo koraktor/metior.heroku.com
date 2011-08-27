@@ -6,7 +6,7 @@ Metior::Application.routes.draw do
 
   match '/stats' => redirect { |params, req| "/#{req[:user]}/#{req[:project]}" }
 
-  match '/:user/:project' => 'stats#report',
+  match '/:user/:project' => 'stats#basic_stats',
     :constraints => project_constraints
 
   match '/:user/:project/calendar' => 'stats#calendar',

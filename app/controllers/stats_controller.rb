@@ -4,14 +4,14 @@ require File.join(Rails.root, 'app', 'reports', 'heroku')
 
 class StatsController < ApplicationController
 
+  def basic_stats
+    return unless generate_report
+    render :file => File.join(report_path, 'basic_stats.html')
+  end
+
   def calendar
     return unless generate_report
     render :file => File.join(report_path, 'calendar.html')
-  end
-
-  def report
-    return unless generate_report
-    render :file => File.join(report_path, 'index.html')
   end
 
   private
@@ -21,7 +21,7 @@ class StatsController < ApplicationController
     @github_project = "#{@user}/#{@project}"
 
     if File.exist? report_path
-      last_update = File.mtime File.join(report_path, 'index.html')
+      last_update = File.mtime File.join(report_path, 'basic_stats.html')
       if last_update > Time.now - 3600
         cache_time = 3600 - (Time.now - last_update).to_i
         response.headers['Cache-Control'] = "public, max-age=#{cache_time}"

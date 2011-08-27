@@ -14,7 +14,7 @@ class Metior::Report
 
     @@name = :heroku
 
-    @@views = [ :index, :calendar ]
+    @@views = [ :basic_stats, :calendar ]
 
     def init
       @commits.modifications if repository.supports? :line_stats
