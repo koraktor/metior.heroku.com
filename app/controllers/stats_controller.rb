@@ -42,6 +42,11 @@ class StatsController < ApplicationController
       flash.now[:error] = "#{@github_project} does not exist."
       render :index, :status => :not_found
       return false
+    rescue Octokit::Unauthorized
+      flash.now[:error] = "#{@github_project} is private.<br />" <<
+                          "Sorry, private repositories are not supported yet."
+      render :index, :status => :unauthorized
+      return false
     end
 
     repo_path = "#{tmp_path}/repositories/#{@github_project}.git"
