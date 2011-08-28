@@ -2,7 +2,7 @@
     $(formHandler);
 </script>
 
-<form action="stats">
+<form action="<%= stats_path %>">
     <input id="user" name="user" type="text" value="<%= @user || 'user name' %>" />
     /
     <input id="project" name="project" type="text" value="<%= @project || 'project' %>" />
