@@ -63,7 +63,7 @@ class StatsController < ApplicationController
     end
 
     repo = Metior::Git::Repository.new repo_path
-    if github_info.description.empty?
+    if github_info.description.nil? || github_info.description.empty?
       github_info.description = false
     end
     repo.instance_variable_set :@description, github_info.description
