@@ -38,6 +38,11 @@ class StatsController < ApplicationController
       @project    = github_info.name
       @user       = github_info.owner
       @github_project = "#{@user}/#{@project}"
+    rescue Octokit::Forbidden
+      flash.now[:error] = "The limit for GitHub API calls has been " <<
+                          "exceeded.<br />Please try again later."
+      render :index, :status => :forbidden
+      return false
     rescue Octokit::NotFound
       flash.now[:error] = "#{@github_project} does not exist."
       render :index, :status => :not_found
