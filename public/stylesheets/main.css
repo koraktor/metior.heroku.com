@@ -104,29 +104,51 @@ div#footer {
   padding:       0.5em 0;
 }
 
-div#header {
-  font-family:  'Bevan', 'Times New Roman', serif;
-  font-size:    10em;
-  font-weight:  bold;
-  text-align:   right;
-  text-shadow:  #000 10px 10px 1px;
+div#header, div#header_small {
+  font-family: 'Bevan', 'Times New Roman', serif;
+  font-weight: bold;
+  text-align:  right;
 }
 
-div#header a {
+div#header {
+  font-size:   10em;
+  text-shadow: #000 10px 10px 1px;
+}
+
+div#header_small {
+  font-size:   6em;
+  text-shadow: #000 6px 6px 1px;
+}
+
+div#header a, div#header_small a {
   color:           #ffb;
   text-decoration: none;
 }
 
-div#header img {
-  margin:         -0.2em -0.5em 0 -0.1em;
+div#header img, div#header_small img {
   vertical-align: bottom;
+}
+
+div#header_small img {
+  margin: 0 -0.3em 0.3em -0.1em;
+}
+
+div#header img {
+  margin: -0.2em -0.5em 0 -0.1em;
 }
 
 div#social {
   float:       left;
   font-size:   10pt;
   line-height: 1em;
-  margin:      10em 0 0 2em;
+}
+
+div#header div#social {
+  margin: 10em 0 0 2em;
+}
+
+div#header_small div#social {
+  margin: 4em 0 0 2em;
 }
 
 div#timestamp {

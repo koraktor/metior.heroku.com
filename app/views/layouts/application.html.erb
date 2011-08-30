@@ -42,7 +42,7 @@
              src="http://s3.amazonaws.com/github/ribbons/forkme_left_orange_ff7600.png"
              alt="Fork me on GitHub" />
     </a>
-    <div id="header">
+    <div id="header<%= '_small' unless request.path == '/' %>">
         <div id="social">
             <g:plusone href="http://metior.herokuapp.com" size="tall"></g:plusone>
             <a href="http://twitter.com/share" class="twitter-share-button"
@@ -55,7 +55,11 @@
             <noscript><a href="http://flattr.com/thing/382588/Metior-on-Heroku" target="_blank">
             <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
         </div>
-        <%= link_to ('Meti%sr' % [image_tag('metior.png')]).html_safe, '/' %>
+        <% if request.path == '/' %>
+          Meti<%= image_tag('metior.png') %>r
+        <% else %>
+          <%= link_to ('Meti%sr' % [image_tag('metior-small.png')]).html_safe, '/' %>
+        <% end %>
     </div>
     <div id="content">
         <% if flash[:error] %>
