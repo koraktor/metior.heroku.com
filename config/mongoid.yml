@@ -1,0 +1,5 @@
+development:
+  uri: mongodb://metior:metior@localhost:27017/metior
+
+production:
+  uri: <%= ENV['MONGOLAB_URI'] %>

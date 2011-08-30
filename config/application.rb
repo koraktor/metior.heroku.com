@@ -14,6 +14,8 @@ module Metior
 
     config.encoding = "utf-8"
 
+    config.mongoid.preload_models = false
+
   end
 
 end
