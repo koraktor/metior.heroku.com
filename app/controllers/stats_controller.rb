@@ -4,95 +4,102 @@ require File.join(Rails.root, 'app', 'reports', 'heroku')
 
 class StatsController < ApplicationController
 
+  rescue_from Octokit::Forbidden do
+    flash.now[:error] = "The limit for GitHub API calls has been " <<
+                        "exceeded.<br />Please try again later."
+    render :index, :status => :forbidden
+  end
+
+  rescue_from Octokit::NotFound do
+    flash.now[:error] = "#{@github_project} does not exist."
+    render :index, :status => :not_found
+  end
+
+  rescue_from Octokit::Unauthorized do
+    flash.now[:error] = "#{@github_project} is private.<br />" <<
+                        "Sorry, private repositories are not supported yet."
+    render :index, :status => :unauthorized
+  end
+
   def basic_stats
-    return unless generate_report
-    render :file => File.join(report_path, 'basic_stats.html')
+    generate_report_and_show_view :basic_stats
   end
 
   def calendar
-    return unless generate_report
-    render :file => File.join(report_path, 'calendar.html')
+    generate_report_and_show_view :calendar
+  end
+
+  def index
+    render :layout => 'application'
   end
 
   private
 
-  def generate_report
+  def find_or_create_project
+    user = User.find_or_initialize_by :id => @user.downcase
+    user.name = @user unless user.persisted?
+
+    project_id = @github_project.downcase.sub '/', '-fwdslsh-'
+    project = user.projects.find_or_initialize_by :id => project_id
+    unless project.persisted?
+      project.path = @github_project
+      github_info = Octokit.repository project.path
+      project.name = github_info.name
+      user.name = github_info.owner
+      project.path = "#{user.name}/#{project.name}"
+      project.description = github_info.description
+    end
+
+    user.save!
+    project.save!
+    project
+  end
+
+  def generate_report_and_show_view(view)
     @user, @project = params[:user], params[:project]
     @github_project = "#{@user}/#{@project}"
 
-    if File.exist? report_path
-      last_update = File.mtime File.join(report_path, 'basic_stats.html')
-      if last_update > Time.now - 3600
-        cache_time = 3600 - (Time.now - last_update).to_i
-        response.headers['Cache-Control'] = "public, max-age=#{cache_time}"
-        return true
-      end
+    project = find_or_create_project
+
+    if @project != project.name || @user != project.user.name
+      redirect_to "/#{project.path}"
+      return
     end
 
-    begin
-      github_info = Octokit.repository @github_project
-      if @project != github_info.name || @user != github_info.owner
-        redirect_to "/#{github_info.owner}/#{github_info.name}"
+    cloned_now = false
+    unless project.cloned?
+      unless project.clone
+        flash.now[:error] = "#{@github_project} could not bet fetched from GitHub."
+        not_found
         return
       end
-      @project    = github_info.name
-      @user       = github_info.owner
-      @github_project = "#{@user}/#{@project}"
-    rescue Octokit::Forbidden
-      flash.now[:error] = "The limit for GitHub API calls has been " <<
-                          "exceeded.<br />Please try again later."
-      render :index, :status => :forbidden
-      return false
-    rescue Octokit::NotFound
-      flash.now[:error] = "#{@github_project} does not exist."
-      render :index, :status => :not_found
-      return false
-    rescue Octokit::Unauthorized
-      flash.now[:error] = "#{@github_project} is private.<br />" <<
-                          "Sorry, private repositories are not supported yet."
-      render :index, :status => :unauthorized
-      return false
+      cloned_now = true
     end
 
-    repo_path = "#{tmp_path}/repositories/#{@github_project}.git"
-    if File.exist? repo_path
-      `git --git-dir #{repo_path} remote update`
-      logger.warn "#{@github_project} could not be updated." unless $?.success?
+    @report = project.reports.find_or_initialize_by :branch => project.default_branch
+
+    if @report.fresh?
+      cache_time = 3600 - @report.age
     else
-      `git clone --mirror git://github.com/#{@github_project}.git #{repo_path}`
-      unless $?.success?
-        flash.now[:error] = "#{@github_project} could not bet fetched from GitHub."
-        render :index, :status => :not_found
-        return false
+      cache_time = 3600
+
+      project.pull unless cloned_now
+
+      unless project.generate_report
+        flash.now[:error] = "#{@github_project} has no commits in the " <<
+                            "\"#{project.default_branch}\" branch."
+        not_found
+        return
       end
     end
 
-    repo = Metior::Git::Repository.new repo_path
-    if github_info.description.nil? || github_info.description.empty?
-      github_info.description = false
-    end
-    repo.instance_variable_set :@description, github_info.description
-    repo.instance_variable_set :@name, false
-    current_branch = repo.instance_variable_get(:@grit_repo).head.name
-    if repo.commits(current_branch).empty?
-      flash.now[:error] = "#{@github_project} has no commits in the " <<
-                          "\"#{current_branch}\" branch."
-      render :index, :status => :not_found
-      return false
-    end
-
-    Metior::Report::Heroku.new(repo, current_branch).generate report_path
-
-    response.headers['Cache-Control'] = 'public, max-age=3600'
-    true
+    response.headers['Cache-Control'] = "public, max-age=#{cache_time}"
+    render :text => @report.output[view.to_s], :content_type => 'text/html',
+           :layout => true
   end
 
-  def report_path
-    @report_path ||= "#{tmp_path}/reports/#{@github_project}"
-  end
-
-  def tmp_path
-    @tmp_path ||= File.join Rails.root, 'tmp'
+  def not_found
+    render :index, :status => :not_found
   end
 
 end

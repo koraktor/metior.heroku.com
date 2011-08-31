@@ -16,6 +16,10 @@ module Metior
 
     config.mongoid.preload_models = false
 
+    def self.tmp_path
+      @@tmp_path ||= File.join Rails.root, 'tmp'
+    end
+
   end
 
 end
