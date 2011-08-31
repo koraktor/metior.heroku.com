@@ -173,6 +173,16 @@ div#most_significant_commits th {
   width: 87%;
 }
 
+div#top_projects {
+  text-align: center;
+}
+
+div#top_projects ol {
+  display:    inline-block;
+  margin:     0;
+  text-align: left;
+}
+
 em, h1, h2, h3 {
   font-family: Bevan, serif;
 }

@@ -9,3 +9,12 @@
     <br /><br />
     <button id="submit" type="submit">Generate stats!</button>
 </form>
+
+<div id="top_projects">
+    <h2>Top projects</h2>
+    <ol>
+    <% Project.order_by([:analyses, :desc]).limit(10).each do |project| %>
+      <li><%= link_to project.path, project.path %></li>
+    <% end %>
+    </ol>
+</div>
