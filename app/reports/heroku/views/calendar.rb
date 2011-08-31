@@ -49,14 +49,6 @@ class Metior::Report::Heroku
       @report.commits.first.committed_date.year
     end
 
-    def meta_now
-      now.strftime('%FT%H:%M:%S%z').insert(-3, ':')
-    end
-
-    def now
-      Time.now
-    end
-
     def repo_name
       repository.path.match(/([\-_.A-z0-9]+\/[-_.A-z0-9]+).git/)[1]
     end

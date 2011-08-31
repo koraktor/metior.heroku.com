@@ -1,0 +1,19 @@
+<% content_for :content do %>
+<h1>
+    Stats for <em><a href="https://github.com/<%= @github_project %>"
+    title="Visit <%= @github_project %> on GitHub">
+    <%= @github_project %></a></em>
+</h1>
+
+<ul id="tabs">
+    <li><%= link_to_unless_current 'Basic stats', :basic_stats %></li>
+    <li><%= link_to_unless_current 'Calendar', :calendar %></li>
+</ul>
+<div id="stats">
+    <%= yield %>
+</div>
+
+<div id="timestamp">Generated at <%= @report.last_update %></div>
+<% end %>
+
+<%= render :file => 'layouts/application' %>

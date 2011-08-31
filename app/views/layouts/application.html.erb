@@ -65,7 +65,7 @@
         <% if flash[:error] %>
             <div id="flash-error"><%= flash[:error].html_safe %></div>
         <% end %>
-        <%= yield %>
+        <%= content_for?(:content) ? yield(:content) : yield %>
     </div>
     <div id="footer">
         © 2011 — Sebastian Staudt<br />

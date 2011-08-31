@@ -40,20 +40,12 @@ class Metior::Report::Heroku
       @activity[:last_commit_date]
     end
 
-    def meta_now
-      now.strftime('%FT%H:%M:%S%z').insert(-3, ':')
-    end
-
     def most_active_day
       @activity[:most_active_day].strftime '%m/%d/%Y' rescue ''
     end
 
     def most_significant_commits
       @report.commits.most_significant(5).values
-    end
-
-    def now
-      Time.now
     end
 
     def range
