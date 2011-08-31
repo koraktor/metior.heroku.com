@@ -190,8 +190,9 @@ h1 {
   -webkit-box-bottom-shadow: #000 2px 2px;
 }
 
-h1 em {
-  color: #ffb;
+h1 a {
+  color:           #ffb;
+  text-decoration: none;
 }
 
 h2, h3 {
