@@ -4,7 +4,6 @@ GIT
   specs:
     metior (0.2.0)
       grit (~> 2.4.1)
-      hashery (~> 1.4.0)
       mustache (~> 0.99.4)
       octokit (~> 0.6.4)
 
@@ -56,7 +55,6 @@ GEM
     grit (2.4.1)
       diff-lcs (~> 1.1)
       mime-types (~> 1.15)
-    hashery (1.4.0)
     hashie (1.0.0)
     i18n (0.5.0)
     jquery-rails (1.0.13)
