@@ -30,6 +30,8 @@ class StatsController < ApplicationController
   end
 
   def index
+    response.headers['Cache-Control'] = "public, max-age=180"
+
     render :layout => 'application'
   end
 
