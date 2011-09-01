@@ -26,7 +26,7 @@ class StatsController < ApplicationController
   end
 
   def calendar
-    generate_report_and_show_view :calendar
+    generate_report_and_show_view :calendar, 'stats/calendar'
   end
 
   def index
@@ -57,7 +57,7 @@ class StatsController < ApplicationController
     project
   end
 
-  def generate_report_and_show_view(view)
+  def generate_report_and_show_view(view, layout = nil)
     @user, @project = params[:user], params[:project]
     @github_project = "#{@user}/#{@project}"
 
@@ -95,9 +95,11 @@ class StatsController < ApplicationController
       end
     end
 
+    layout = true if layout.nil?
+
     response.headers['Cache-Control'] = "public, max-age=#{cache_time}"
     render :text => @report.output[view.to_s], :content_type => 'text/html',
-           :layout => true
+           :layout => layout
   end
 
   def not_found

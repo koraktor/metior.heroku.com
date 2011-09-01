@@ -11,9 +11,9 @@
     <%= link_or_text 'Calendar', :calendar %>
 </div>
 <div id="stats">
-    <%= yield %>
+    <%= content_for?(:stats_content) ? yield(:stats_content) : yield %>
 </div>
 
 <% end %>
 
-<%= render :file => 'layouts/application' %>
+<%= render :template => 'layouts/application' %>

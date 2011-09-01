@@ -1,0 +1,42 @@
+<% content_for :stats_content do %>
+
+<p style="font-size: 10pt">
+    The following calendar shows the history of the repository over
+    the years. Each big block represents one year. The big sections of
+    a year represent months while the small squares represent single
+    days.
+</p>
+
+<p>
+    <a id="show-impact" href="javascript:showImpact()">Show Impact</a> –
+    <a id="show-commits" href="javascript:showCommits()">Show Commits</a> –
+    <a id="show-change" href="javascript:showChange()">Show Line Changes</a>
+</p>
+
+<p id="impact-description" style="font-size: 10pt">
+    This view shows the impact on the repository over time.
+    If a day is green it means there has been code changed on that day. The
+    darker the color, the more code has been changed compared to the rest of
+    the repository's history.
+</p>
+
+<p id="commits-description" style="font-size: 10pt; display: none">
+    This view shows the number of commits in the repository over time.
+    If a day is green it means there has been one or more commits on that day.
+    The darker the color, the more commits have been made compared to the rest
+    of the repository's history.
+</p>
+
+<p id="change-description" style="font-size: 10pt; display: none">
+    This view shows the line changes in the repository over time.
+    If a day is green it means code has been added overall. A red
+    day means there has been more code deleted than added. The darker
+    the color, the more code has been changed compared to the rest of
+    the repository's history.
+</p>
+
+<%= yield %>
+
+<% end %>
+
+<%= render :template => 'layouts/stats' %>
