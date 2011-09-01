@@ -6,10 +6,10 @@
     <div id="timestamp">Last updated at <%= @report.last_update %></div>
 </h1>
 
-<ul id="tabs">
-    <li><%= link_to_unless_current 'Basic stats', :basic_stats %></li>
-    <li><%= link_to_unless_current 'Calendar', :calendar %></li>
-</ul>
+<div id="tabs">
+    <%= link_or_text 'Basic stats', :basic_stats %>
+    <%= link_or_text 'Calendar', :calendar %>
+</div>
 <div id="stats">
     <%= yield %>
 </div>

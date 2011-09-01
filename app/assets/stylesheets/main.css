@@ -17,7 +17,7 @@ a {
 }
 
 a:hover, a.active {
-  color: #aa5;
+  color: #aa5 !important;
 }
 
 a, em {
@@ -35,6 +35,7 @@ button#submit {
   background: #563412;
   border:     2px solid #aa5;
   color:      #aa5;
+  cursor:     pointer;
   font-size:  18pt;
 }
 
@@ -152,10 +153,11 @@ div#header_small div#social {
 }
 
 div#timestamp {
-  font-size:  9pt;
-  margin-top: 3em;
-  width:      100%;
-  text-align: center;
+  color:       #aa5;
+  float:       right;
+  font-family: 'Helvetica', sans-serif;
+  font-size:   9pt;
+  text-shadow: none;
 }
 
 div#footer {
@@ -171,6 +173,40 @@ div#repository_information strong {
 
 div#most_significant_commits th {
   width: 87%;
+}
+
+div#tabs {
+  padding: 2em 0 2px 0.5em !important;
+}
+
+div#tabs a, div#tabs span {
+  border:        2px solid #ffb;
+  border-bottom: none;
+  border-radius: 3px;
+  display:       inline;
+  font-family:   'Bevan', 'Times New Roman', serif;
+  font-size:     14pt;
+  margin-bottom: 0;
+  padding:       3px;
+
+  -moz-border-radius:    3px;
+  -webkit-border-radius: 3px;
+}
+
+div#tabs a {
+  color:           #ffb;
+  text-decoration: none;
+}
+
+div#tabs a:hover {
+  background: #ffb ;
+}
+
+div#tabs span  {
+  background:  #563412;
+  color:       #f95;
+  cursor:      default;
+  text-shadow: #000 1px 1px 1px;
 }
 
 div#top_projects {
@@ -196,8 +232,6 @@ h1 {
   margin-bottom:   0;
   text-decoration: none;
   text-shadow:     #000 2px 2px 1px;
-
-  -webkit-box-bottom-shadow: #000 2px 2px;
 }
 
 h1 a {
@@ -297,54 +331,24 @@ tr.odd {
   background: #563412;
 }
 
-ul {
-  list-style:    square;
-  margin-bottom: 0;
-}
-
-ul#tabs {
-  height: 2.5em;
-}
-
-ul#tabs a {
-  text-decoration: none;
-  padding:         3px;
-}
-
-ul#tabs a:hover {
-  background: #f95;
-}
-
-ul#tabs li {
-  border:         2px solid #AA5;
-  border-radius:  3px;
-  display:        inline;
-  font-size:      14pt;
-  height:         16pt;
-  line-height:    16pt;
-
-  -moz-border-radius:    3px;
-  -webkit-border-radius: 3px;
-}
-
 #calendar {
-    fill: #ffb;
-    font: 9pt sans-serif;
+  fill: #ffb;
+  font: 9pt sans-serif;
 }
 
 .day, .month {
-    shape-rendering: crispEdges;
+  shape-rendering: crispEdges;
 }
 
 .day {
-    fill:   #ffd;
-    stroke: #ccc;
+  fill:   #ffd;
+  stroke: #ccc;
 }
 
 .month {
-    fill:         none;
-    stroke:       #000;
-    stroke-width: 2px;
+  fill:         none;
+  stroke:       #000;
+  stroke-width: 2px;
 }
 
 .nothing { fill: #fff; }
