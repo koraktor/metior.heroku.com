@@ -48,8 +48,8 @@ class StatsController < ApplicationController
       github_info = Octokit.repository project.path
       project.name = github_info.name
       user.name = github_info.owner
-      project.path = "#{user.name}/#{project.name}"
       project.description = github_info.description
+      project.path = "#{user.name}/#{project.name}"
     end
 
     user.save!
