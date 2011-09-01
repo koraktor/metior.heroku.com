@@ -52,21 +52,9 @@ class Metior::Report::Heroku
       @report.range
     end
 
-    def repo_name
-      repository.path.match(/([\-_.A-z0-9]+\/[-_.A-z0-9]+).git/)[1]
-    end
-
     def reset_count
       super
       nil
-    end
-
-    def title
-      "Stats for #{repo_name}"
-    end
-
-    def version
-      Metior::VERSION
     end
 
   end

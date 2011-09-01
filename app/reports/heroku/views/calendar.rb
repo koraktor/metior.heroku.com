@@ -49,18 +49,6 @@ class Metior::Report::Heroku
       @report.commits.first.committed_date.year
     end
 
-    def repo_name
-      repository.path.match(/([\-_.A-z0-9]+\/[-_.A-z0-9]+).git/)[1]
-    end
-
-    def title
-      "Calendar for #{repo_name}"
-    end
-
-    def version
-      Metior::VERSION
-    end
-
   end
 
 end
