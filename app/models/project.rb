@@ -33,9 +33,14 @@ class Project
   def generate_report
     return false if repo.commits(default_branch).empty?
 
+    self.analyses += 1
+
     branch_id = repo.id_for_ref default_branch
     report = reports.find_or_initialize_by :branch => default_branch
-    return true if report.commit == branch_id
+    if report.commit == branch_id
+      save
+      return true
+    end
     report.commit = branch_id
 
     repo.instance_variable_set :@description, description
@@ -43,10 +48,9 @@ class Project
 
     report.generate
 
-    self.analyses += 1
     save
   end
-  
+
   def pull
     `git --git-dir #{repo_path} remote update`
     logger.warn "#{path} could not be updated." unless $?.success?
