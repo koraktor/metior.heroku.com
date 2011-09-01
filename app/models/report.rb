@@ -20,9 +20,8 @@ class Report
   end
 
   def generate
-    repo = Metior::Git::Repository.new project.repo_path
     self.output = {}
-    output = Metior::Report::Heroku.new(repo, branch).render
+    output = Metior::Report::Heroku.new(project.repo, branch).render
     output.each do |name, view_output|
       self.output[name.to_s] = view_output
     end
