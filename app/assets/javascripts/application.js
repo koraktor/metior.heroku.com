@@ -42,7 +42,7 @@ var quantizeAdditions, quantizeCommits, quantizeDeletions, quantizeImpact;
 
 var generateCalendar = function(firstYear, lastYear) {
     var w = 850,
-    pw = 14,
+    pw = 25,
     z = ~~((w - pw * 2) / 53),
     ph = z >> 1,
     h = z * 7;
