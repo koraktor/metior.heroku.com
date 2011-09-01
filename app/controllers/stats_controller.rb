@@ -7,18 +7,18 @@ class StatsController < ApplicationController
   rescue_from Octokit::Forbidden do
     flash.now[:error] = "The limit for GitHub API calls has been " <<
                         "exceeded.<br />Please try again later."
-    render :index, :status => :forbidden
+    render :index, :layout => 'application', :status => :forbidden
   end
 
   rescue_from Octokit::NotFound do
     flash.now[:error] = "#{@github_project} does not exist."
-    render :index, :status => :not_found
+    render :index, :layout => 'application', :status => :not_found
   end
 
   rescue_from Octokit::Unauthorized do
     flash.now[:error] = "#{@github_project} is private.<br />" <<
                         "Sorry, private repositories are not supported yet."
-    render :index, :status => :unauthorized
+    render :index, :layout => 'application', :status => :unauthorized
   end
 
   def basic_stats
