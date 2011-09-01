@@ -20,8 +20,9 @@ var formHandler = function() {
     $('#submit').click(function() {
         if($('input.inactive').length == 0) {
             window.location = '/' + $('#user').val() + '/' + $('#project').val();
-            return false;
         }
+
+        return false;
     });
 };
 
