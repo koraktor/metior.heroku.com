@@ -38,14 +38,12 @@ class StatsController < ApplicationController
   private
 
   def find_or_create_project
-    user = User.find_or_initialize_by :id => @user.downcase
+    user = User.find_or_initialize_by :name => @user.downcase
     user.name = @user unless user.persisted?
 
-    project_id = @github_project.downcase.sub '/', '-fwdslsh-'
-    project = user.projects.find_or_initialize_by :id => project_id
+    project = user.projects.find_or_initialize_by :name => @project
     unless project.persisted?
-      project.path = @github_project
-      github_info = Octokit.repository project.path
+      github_info = Octokit.repository "#{user.name}/#{project.name}"
       project.name = github_info.name
       user.name = github_info.owner
       project.description = github_info.description
@@ -59,9 +57,9 @@ class StatsController < ApplicationController
 
   def generate_report_and_show_view(view, layout = nil)
     @user, @project = params[:user], params[:project]
-    @github_project = "#{@user}/#{@project}"
 
     project = find_or_create_project
+    @github_project = project.path
 
     if @project != project.name || @user != project.user.name
       redirect_to "/#{project.path}"
