@@ -3,6 +3,7 @@
     Stats for <em><a href="https://github.com/<%= @github_project %>"
     title="Visit <%= @github_project %> on GitHub">
     <%= @github_project %></a></em>
+    <div id="timestamp">Last updated at <%= @report.last_update %></div>
 </h1>
 
 <ul id="tabs">
@@ -13,7 +14,6 @@
     <%= yield %>
 </div>
 
-<div id="timestamp">Generated at <%= @report.last_update %></div>
 <% end %>
 
 <%= render :file => 'layouts/application' %>
