@@ -1,0 +1,51 @@
+div#repository_information strong {
+  margin-left: 2em;
+}
+
+div#most_significant_commits th {
+  width: 85%;
+}
+
+span.add, span.del {
+  font-weight: bold;
+}
+
+table {
+  border-collapse: collapse;
+  margin:          0 auto;
+  width:           98%;
+}
+
+td:last-child {
+  text-align: right;
+}
+
+td.add {
+  color:   #090;
+  padding: 0 !important;
+}
+
+td.del {
+  color:      #a00;
+  text-align: left !important;
+}
+
+td, th {
+  padding: 0.2em;
+}
+
+th {
+  text-align: left;
+}
+
+tr:not(:last-child) {
+  border-bottom: 1px solid #652;
+}
+
+tr.even {
+  background: #521;
+}
+
+tr.odd {
+  background: #563412;
+}
