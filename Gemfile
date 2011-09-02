@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem 'bson_ext', '~> 1.3.1'
-gem 'dalli', '~> 1.0.5'
+gem 'dalli', '~> 1.1.1'
 gem 'jquery-rails', '~> 1.0.13'
 gem 'mongoid', '~> 2.2.0'
 gem 'rails', '~> 3.1.0'
