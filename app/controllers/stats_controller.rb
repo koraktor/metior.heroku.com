@@ -57,6 +57,7 @@ class StatsController < ApplicationController
 
   def generate_report_and_show_view(view, layout = nil)
     @user, @project = params[:user], params[:project]
+    @github_project = "#{@user}/#{@project}"
 
     project = find_or_create_project
     @github_project = project.path
