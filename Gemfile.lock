@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/koraktor/metior.git
-  revision: 616cfb7fcc875dad59e2c4860570921f28bc7f61
+  revision: 01c2ebc7f62ec60567610222e978d589375187e1
   specs:
     metior (0.2.0)
       grit (~> 2.4.1)

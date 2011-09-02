@@ -12,11 +12,11 @@ class Project
 
   belongs_to :user
   embeds_many :reports
-  
+
   def clone
     `git clone --mirror git://github.com/#{path}.git #{repo_path}`
   end
-  
+
   def cloned?
     File.exist? repo_path
   end
@@ -24,10 +24,7 @@ class Project
   def default_branch
     return @default_branch unless @default_branch.nil?
 
-    if File.exist? repo_path
-      @default_branch = repo.instance_variable_get(:@grit_repo).head.name
-    end
-    @default_branch
+    @default_branch = repo.current_branch if File.exist? repo_path
   end
 
   def generate_report
