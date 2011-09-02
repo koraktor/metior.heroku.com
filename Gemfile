@@ -10,6 +10,7 @@ gem 'thin', '~> 1.2.11'
 gem 'metior', :git => 'git://github.com/koraktor/metior.git'
 
 group :assets do
+  gem 'sass-rails', '~> 3.1.0'
   gem 'uglifier', '~> 1.0.2'
 end
 
