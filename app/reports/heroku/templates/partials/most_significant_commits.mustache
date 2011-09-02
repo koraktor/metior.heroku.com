@@ -4,9 +4,9 @@
         {{#most_significant_commits}}
           <tr class="{{even_odd}}">
             <th>{{> commit/minimal}}</th>
-            <td class="add no_padding">+{{additions}}</td>
-            <td class="no_padding">/</td>
-            <td class="del no_padding">-{{deletions}}</td>
+            <td class="add">+{{additions}}</td>
+            <td>/</td>
+            <td class="del">-{{deletions}}</td>
           </tr>
         {{/most_significant_commits}}
         {{reset_count}}

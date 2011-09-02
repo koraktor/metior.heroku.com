@@ -172,7 +172,7 @@ div#repository_information strong {
 }
 
 div#most_significant_commits th {
-  width: 87%;
+  width: 85%;
 }
 
 div#tabs {
@@ -300,15 +300,13 @@ td:last-child {
 }
 
 td.add {
-  color: #090;
+  color:   #090;
+  padding: 0 !important;
 }
 
 td.del {
-  color: #a00;
-}
-
-td.no_padding {
-  padding: 0 0.2em;
+  color:      #a00;
+  text-align: left !important;
 }
 
 td, th {
