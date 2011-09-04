@@ -5,6 +5,7 @@ gem 'dalli', '~> 1.1.1'
 gem 'jquery-rails', '~> 1.0.13'
 gem 'mongoid', '~> 2.2.0'
 gem 'rails', '~> 3.1.0'
+gem 'resque', '~> 1.19.0'
 gem 'thin', '~> 1.2.11'
 
 gem 'metior', :git => 'git://github.com/koraktor/metior.git'
