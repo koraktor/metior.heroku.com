@@ -1,0 +1,13 @@
+<script type="text/javascript">
+    $(setTimeout(function() { updatePage('<%= @github_project %>') }, 10000));
+</script>
+
+<h1>
+    Stats for <em><a href="https://github.com/<%= @github_project %>"
+    title="Visit <%= @github_project %> on GitHub">
+    <%= @github_project %></a></em>
+</h1>
+
+<div id="stats">
+    The stats for <%= @github_project %> are not available yet.
+</div>

@@ -82,12 +82,10 @@ div#content div:not(:last-child) {
   border-bottom: 2px solid #ffb;
 }
 
-div#flash-error {
-  background:    #f99;
-  border:        2px solid #a00 !important;
+div#flash-error, div#flash-notice {
+  border:        2px solid;
   border-top:    none !important;
   border-radius: 0 0 5px 5px;
-  color:         #a00;
   font-family:   'Helvetica', sans-serif;
   font-size:     12pt;
   font-weight:   bold;
@@ -100,6 +98,18 @@ div#flash-error {
 
   -moz-border-radius:    0 0 5px 5px;
   -webkit-border-radius: 0 0 5px 5px;
+}
+
+div#flash-error {
+  background:   #f99;
+  border-color: #a00 !important;
+  color:        #a00;
+}
+
+div#flash-notice {
+  background:   #9f9;
+  border-color: #0a0 !important;
+  color:        #0a0;
 }
 
 div#footer {

@@ -15,6 +15,7 @@ class Project
 
   def clone
     `git clone --mirror git://github.com/#{path}.git #{repo_path}`
+    $?.success?
   end
 
   def cloned?
@@ -27,30 +28,9 @@ class Project
     @default_branch = repo.current_branch if File.exist? repo_path
   end
 
-  def generate_report
-    return false if repo.commits(default_branch).empty?
-
-    self.analyses += 1
-
-    branch_id = repo.id_for_ref default_branch
-    report = reports.find_or_initialize_by :branch => default_branch
-    if report.commit == branch_id
-      save
-      return true
-    end
-    report.commit = branch_id
-
-    repo.instance_variable_set :@description, description
-    repo.instance_variable_set :@name, name
-
-    report.generate
-
-    save
-  end
-
   def pull
     `git --git-dir #{repo_path} remote update`
-    logger.warn "#{path} could not be updated." unless $?.success?
+    $?.success?
   end
 
   def repo

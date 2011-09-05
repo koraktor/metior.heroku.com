@@ -21,6 +21,13 @@ class StatsController < ApplicationController
     render :index, :layout => 'application', :status => :unauthorized
   end
 
+  rescue_from SocketError do
+    flash.now[:error] = "There was a problem communicating with GitHub." <<
+                        "<br />Please try again in a few minutes."
+    @user, @project = nil
+    render :index, :layout => 'application', :status => :internal_error
+  end
+
   def basic_stats
     generate_report_and_show_view :basic_stats
   end
@@ -55,7 +62,7 @@ class StatsController < ApplicationController
     project
   end
 
-  def generate_report_and_show_view(view, layout = nil)
+  def generate_report_and_show_view(view, layout = true)
     @user, @project = params[:user], params[:project]
     @github_project = "#{@user}/#{@project}"
 
@@ -67,38 +74,36 @@ class StatsController < ApplicationController
       return
     end
 
-    cloned_now = false
-    unless project.cloned?
-      unless project.clone
-        flash.now[:error] = "#{@github_project} could not bet fetched from GitHub."
-        not_found
-        return
-      end
-      cloned_now = true
-    end
-
     @report = project.reports.find_or_initialize_by :branch => project.default_branch
+    last_error = @report.last_error
+
+    output = @report.output[view.to_s] if @report.available?
 
     if @report.fresh?
       cache_time = 3600 - @report.age
     else
-      cache_time = 3600
+      @report.queue! if last_error.nil? && !@report.queued?
 
-      project.pull unless cloned_now
+      cache_time = 5
 
-      unless project.generate_report
-        flash.now[:error] = "#{@github_project} has no commits in the " <<
-                            "\"#{project.default_branch}\" branch."
-        not_found
-        return
+      if @report.available?
+        flash.now[:notice] = "The report for #{@github_project} will be re-generated soon."
+      else
+        flash.now[:notice] = "The report for #{@github_project} will be generated soon."
+        render :unavailable, :layout => 'application'
       end
     end
 
-    layout = true if layout.nil?
+    unless last_error.nil?
+      flash.now[:error]  = last_error
+      flash.now[:notice] = nil
+    end
 
-    response.headers['Cache-Control'] = "public, max-age=#{cache_time}"
-    render :text => @report.output[view.to_s], :content_type => 'text/html',
-           :layout => layout
+    if response_body.nil?
+      response.headers['Cache-Control'] = "public, max-age=#{cache_time}"
+      render :text => output, :content_type => 'text/html',
+             :layout => layout
+    end
   end
 
   def not_found
