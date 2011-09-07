@@ -38,7 +38,7 @@ class StatsController < ApplicationController
   private
 
   def find_or_create_project
-    user = User.find_or_initialize_by :name => @user.downcase
+    user = User.find_or_initialize_by :name => @user
     user.name = @user unless user.persisted?
 
     project = user.projects.find_or_initialize_by :name => @project
