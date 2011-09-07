@@ -33,8 +33,8 @@ var formHandler = function() {
 var updatePage = function(github_project) {
   var pageUpdater = function() {
     $.ajax('/' + github_project + '/uptodate', {
-      'success': function(uptodate) {
-        if(uptodate) {
+      'success': function(data) {
+        if(data.uptodate) {
           location.reload();
         } else {
           setTimeout(pageUpdater, 10000);
