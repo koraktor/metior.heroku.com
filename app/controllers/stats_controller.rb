@@ -28,6 +28,25 @@ class StatsController < ApplicationController
     render :index, :layout => 'application', :status => :internal_error
   end
 
+  def uptodate
+    uptodate = lambda do
+      user = User.find_or_initialize_by :name => params[:user]
+      return false unless user.persisted?
+      project = user.projects.find_or_initialize_by :name => params[:project]
+      return false unless project.persisted?
+      report  = project.reports.find_or_initialize_by :branch => project.default_branch
+      return false unless report.persisted?
+      last_update = report.last_update
+      last_update.nil? ? false : (last_update >= Time.now - 3600)
+    end
+
+    respond_to do |format|
+      format.json do
+        render :json => { :uptodate => uptodate.call }
+      end
+    end
+  end
+
   def basic_stats
     generate_report_and_show_view :basic_stats
   end
@@ -87,11 +106,13 @@ class StatsController < ApplicationController
       cache_time = 5
 
       if @report.available?
+        @update_pending = true
         flash.now[:notice] = "The report for #{@github_project} will be re-generated soon."
       else
         flash.now[:notice] = "The report for #{@github_project} will be generated soon."
         render :unavailable, :layout => 'application'
       end
+      flash.now[:notice] << '<br />This page will be automatically reloaded.'
     end
 
     unless last_error.nil?

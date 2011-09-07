@@ -14,6 +14,9 @@ Metior::Application.routes.draw do
     :as => :calendar,
     :constraints => project_constraints
 
+  match '/:user/:project/uptodate' => 'stats#uptodate',
+    :constraints => project_constraints
+
   match '*url', :to => 'application#not_found'
 
 end

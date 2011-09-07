@@ -1,4 +1,10 @@
 <% content_for :content do %>
+<% if @update_pending %>
+<script type="text/javascript">
+    $(setTimeout(function() { updatePage('<%= @github_project %>') }, 10000));
+</script>
+<% end %>
+
 <h1>
     Stats for <em><a href="https://github.com/<%= @github_project %>"
     title="Visit <%= @github_project %> on GitHub">

@@ -28,4 +28,19 @@ var formHandler = function() {
 
         return false;
     });
+}
+
+var updatePage = function(github_project) {
+  var pageUpdater = function() {
+    $.ajax('/' + github_project + '/uptodate', {
+      'success': function(uptodate) {
+        if(uptodate) {
+          location.reload();
+        } else {
+          setTimeout(pageUpdater, 10000);
+        }
+      }
+    });
+  }
+  pageUpdater();
 };
