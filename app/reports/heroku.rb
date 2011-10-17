@@ -8,17 +8,11 @@ require 'metior'
 class Metior::Report
 
   # @author Sebastian Staudt
-  class Heroku < self
+  class Heroku < Default
 
-    @@assets = []
+    assets []
 
-    @@name = :heroku
-
-    @@views = [ :basic_stats, :calendar ]
-
-    def init
-      @commits.modifications if repository.supports? :line_stats
-    end
+    views [ :basic_stats, :calendar ]
 
     def self.path
       File.join File.dirname(__FILE__), name
