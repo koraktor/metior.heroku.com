@@ -3,7 +3,27 @@
 #
 # Copyright (c) 2011, Sebastian Staudt
 
+require 'heroku'
+
 class ReportJob
+
+  @@heroku = Heroku::Client.new ENV['HEROKU_LOGIN'], ENV['HEROKU_PASSWORD']
+
+  def self.after_enqueue_scale_up(*args)
+    if ENV.key? 'HEROKU_APP'
+      ReportJob.workers = 1 if ReportJob.workers == 0
+    end
+  end
+
+  def self.after_perform_scale_down(*args)
+    if ENV.key? 'HEROKU_APP'
+      ReportJob.workers = 0 if ReportJob.job_count == 0
+    end
+  end
+
+  def self.job_count
+    Resque.info[:pending].to_i
+  end
 
   def self.perform(github_project, branch)
     $stdout.puts "--- Started working on #{github_project}@#{branch}..."
@@ -31,6 +51,14 @@ class ReportJob
 
   def self.queue
     :report
+  end
+
+  def self.workers
+    @@heroku.ps(ENV['HEROKU_APP']).count { |p| p['process'] =~ /^worker\./ }
+  end
+
+  def self.workers=(count)
+    @@heroku.ps_scale ENV['HEROKU_APP'], :type => 'worker', :qty => count
   end
 
 end
