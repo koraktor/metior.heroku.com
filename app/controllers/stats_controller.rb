@@ -34,10 +34,9 @@ class StatsController < ApplicationController
       return false unless user.persisted?
       project = user.projects.find_or_initialize_by :name => params[:project]
       return false unless project.persisted?
-      report  = project.reports.find_or_initialize_by :branch => project.default_branch
+      report = project.reports.find_or_initialize_by :branch => project.default_branch
       return false unless report.persisted?
-      last_update = report.last_update
-      last_update.nil? ? false : (last_update >= Time.now - 3600)
+      report.fresh?
     end
 
     respond_to do |format|
@@ -72,6 +71,7 @@ class StatsController < ApplicationController
       github_info = Octokit.repository "#{user.name}/#{project.name}"
       project.name = github_info.name
       user.name = github_info.owner
+      project.default_branch = github_info.master_branch || 'master'
       project.description = github_info.description
       project.path = "#{user.name}/#{project.name}"
     end

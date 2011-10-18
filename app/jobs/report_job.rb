@@ -42,7 +42,6 @@ class ReportJob
       end
     end
 
-    branch = project.default_branch if branch.nil?
     report = project.reports.find_or_initialize_by :branch => branch
     report.generate
 

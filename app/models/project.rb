@@ -6,6 +6,7 @@ class Project
 
   field :analyses, :type => Integer, :default => 0
   field :description, :type => String
+  field :default_branch, :type => String
   field :name, :type => String
   field :path, :type => String
   key :path
@@ -20,12 +21,6 @@ class Project
 
   def cloned?
     File.exist? repo_path
-  end
-
-  def default_branch
-    return @default_branch unless @default_branch.nil?
-
-    @default_branch = repo.current_branch if File.exist? repo_path
   end
 
   def pull
