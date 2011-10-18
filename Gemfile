@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'bson_ext', '~> 1.3.1'
+gem 'bson_ext', '~> 1.4.0'
 gem 'dalli', '~> 1.1.1'
 gem 'heroku', '~> 2.9.0'
 gem 'jquery-rails', '~> 1.0.13'
