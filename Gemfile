@@ -17,5 +17,5 @@ group :assets do
 end
 
 group :production do
-  gem 'newrelic_rpm', '~> 3.1.1'
+  gem 'newrelic_rpm', '~> 3.2.0'
 end
