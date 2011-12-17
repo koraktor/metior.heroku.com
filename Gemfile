@@ -5,7 +5,7 @@ gem 'dalli', '~> 1.1.1'
 gem 'heroku', '~> 2.16.1'
 gem 'jquery-rails', '~> 1.0.13'
 gem 'mongoid', '~> 2.3.4'
-gem 'rails', '~> 3.1.1'
+gem 'rails', '= 3.1.3'
 gem 'resque', '~> 1.19.0'
 gem 'thin', '~> 1.3.1'
 
