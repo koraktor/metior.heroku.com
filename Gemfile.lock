@@ -158,7 +158,7 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.30)
-    uglifier (1.2.0)
+    uglifier (1.2.3)
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
     vegas (0.1.8)
