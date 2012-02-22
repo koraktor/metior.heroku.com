@@ -6,7 +6,7 @@ gem 'heroku', '~> 2.19.2'
 gem 'jquery-rails', '~> 1.0.13'
 gem 'mongoid', '~> 2.4.3'
 gem 'rails', '= 3.1.3'
-gem 'resque', '~> 1.19.0'
+gem 'resque', '~> 1.20.0'
 gem 'thin', '~> 1.3.1'
 
 gem 'metior', :git => 'git://github.com/koraktor/metior.git',
