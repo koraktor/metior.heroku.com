@@ -7,7 +7,7 @@ gem 'jquery-rails', '~> 1.0.13'
 gem 'mongoid', '~> 2.4.3'
 gem 'rails', '= 3.1.4'
 gem 'resque', '~> 1.20.0'
-gem 'thin', '~> 1.3.1'
+gem 'unicorn', '~> 4.2.1'
 
 gem 'metior', :git => 'git://github.com/koraktor/metior.git',
               :ref => '501e37cdb37d259e18a65bd9674159363f423c96'
