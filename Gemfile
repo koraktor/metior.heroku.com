@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 gem 'bson_ext', '~> 1.6.1'
 gem 'dalli', '~> 1.1.1'
-gem 'heroku', '~> 2.21.2'
+gem 'heroku', '~> 2.23'
 gem 'jquery-rails', '~> 1.0.13'
 gem 'mongoid', '~> 2.4.3'
 gem 'rails', '= 3.1.4'
